@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Discussion Forum Menu</title>
+    <link href="../css/menu.css" rel="stylesheet" type="text/css" />
+    <style>
+        #logOut{
+            background-color: #4286f4;
+            color: #000000;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 20px;
+            border: 1px solid #ffffff;
+            border-radius: 20px;
+        }
+        #logOut:hover{
+            background-color: white;
+            color: #4286f4;
+        }
+    </style>
+</head>
+<body>
+<header id = "top">
+    <h1> Discussion Menu </h1>
+</header>
+<section id = "links">
+    <div>
+        <header>View Threads</header>
+        <p>Join the conversation by Replying to some of our most popular forum threads!</p>
+        <a href="/handler/Threads/showThread.php"><button>Show Threads</button></a>
+    </div>
+
+    <div>
+        <header>Add Thread</header>
+        <p>Contribute to our Forum by Adding a new topic for others to see!</p>
+        <a href="addThread.html"><button>Add Thread</button></a>
+    </div>
+</section>
+
+<a href = "/Initial/logout.php"><button id = "logOut">Log Out</button></a>
+</body>
+</html>
