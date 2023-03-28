@@ -2,11 +2,11 @@
 <html>
 <head>
   <title>Add thread</title>
-  <link href="css/forms.css" rel="stylesheet" type="/text/css" />
+  <link href="/html_css/css/forms.css" rel="stylesheet" type="/text/css" />
   <style>
     #logOut{
       background-color: #4286f4;
-      color: white;
+      color: #ffffff;
       position: fixed;
       top: 15px;
       right: 15px;
@@ -26,10 +26,10 @@
 </header>
 <nav>
   <a href = "home.html"><button>Main Menu</button></a>
-  <a href="showThread.php"><button>Show Thread</button></a>
-  <a href = "addThread.html"><button>Add Thread</button></a>
+  <a href="/handler/Threads/showThread.php"><button>Show Thread</button></a>
+  <a href = "/html_css/html/addThread.html"><button>Add Thread</button></a>
 </nav>
-<form method="post" action="do_addtopic.php" id = "addForm">
+<form method="post" action="/handler/Operations/addThread.php" id = "addForm">
 
   <p><label for="topic_title">Topic Title:</label><br/>
     <input type="text" id="topic_title" name="topic_title" size="40"
@@ -42,6 +42,6 @@
   <button id = "addTopic" class = "styledButton" type="submit" name="submit" value="submit">Add to Forum</button>
 </form>
 
-<a href = "logout.php"><button id = "logOut">Logout</button></a>
+<a href = "/Initial/logout.php"><button id = "logOut">Logout</button></a>
 </body>
 </html>

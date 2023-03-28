@@ -144,7 +144,7 @@ END_OF_TEXT;
 </head>
 <body>
 <header id = "top">
-    <h1> March Madness Topics </h1>
+    <h1> UniForum Threads </h1>
 </header>
 <nav>
     <a href = "/html_css/html/home.html"><button>Main Menu</button></a>

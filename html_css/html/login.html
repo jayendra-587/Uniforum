@@ -2,26 +2,44 @@
 <html>
 <head>
     <title>User Login Form</title>
-    <link rel="stylesheet" href = "css/forms.css">
+    <link rel="stylesheet" href = "/html_css/css/forms.css">
 </head>
 <body >
 <div class="center">
     <header id = "top">
         <h1> UniForum </h1>
     </header>
-    <form method="post" action="login.php" id = "loginForm">
-        <p id = "inst">Login Here</p>
-        <p><label for="username">Username:</label><br/>
-            <input type="text" id="username" name="username" autofocus autocomplete="off"
-            /></p>
-        <p><label for="password">Password:</label><br/>
-            <input type="password" id="password" name="password" /></p>
-        <button type="submit" name="submit" id="login" class = "styledButton" value="submit">Login</button>
+<!--    <form method="post" action="login.php" id = "login-form">-->
+<!--        <p id = "inst">Login Here</p>-->
+<!--        <p><label for="username">Username:</label><br/>-->
+<!--            <input type="text" id="username" name="username" autofocus autocomplete="off"-->
+<!--            /></p>-->
+<!--        <p><label for="password">Password:</label><br/>-->
+<!--            <input type="password" id="password" name="password" /></p>-->
+<!--        <button type="submit" name="submit" id="login" class = "styledButton" value="submit">Login</button>-->
+<!--    </form>-->
+    <form id="login-form" action="/Initial/login.php">
+        <h2>Login into UniForum</h2>
+        <p>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required autofocus autocomplete="off">
+        </p>
+        <p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        </p>
+        <input type="submit" value="Login">
+        <br>
+        <a href="">Forget Password</a>
+        <div class="error">Incorrect username or password.</div>
     </form>
-
     <form id = "createAccount">
         <a href = "createAccount.html" id = "create">Create an Account</a>
     </form>
+<!--    <form class="">-->
+<!--        <a href="">Forget Password</a>-->
+<!--        <div class="error">Incorrect username or password.</div>-->
+<!--    </form>-->
 </div>
 </body>
 </html>
