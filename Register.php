@@ -1,74 +1,3 @@
-<?
-require_once "config.php";
-
-$username = $password ;
-$username_err = $password_err ;
-
-//error in Username field
-if ($_server['REQUEST_METHORD' == "POST"]) {
-    if (empty(trim($_POST["username"]))) {
-        $username_err = "Username cannot be empty";
-    }
-     else {
-        $sql = "Select id FROM user_details WHERE username = ? ";
-        $stmt = mysqli_prepare($conn, $sql);
-        if ($stml) {
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-            $param_username = trim($_POST['username']);
-
-            if (mysqli_stmt_execute($stmt)) {
-                mysqli_stmt_store_result($stmt);
-                if (mysqli_stmt_num_rows($stmt) == 1) {
-                    $username_err = "This user already exist";
-                } 
-                else {
-                    $username = trim($_POST['username']);
-                }
-            } 
-            else {
-                echo "Something went Wrong...Please be patience, we are working on it";
-            }
-        }
-        mysqli_stmt_close($stmt);
-    }
-
-    //error in Password field
-    if (empty(trim($_POST['password']))) {
-        $password_err = "password cannot be blank";
-    } 
-    elseif (strlen(trim($_POST['password'])) < 5) {
-        $password_err = "Password cannot be less than 5 Characters";
-    } 
-    else {
-        $password = trim($_POST['password']);
-    }
-
-  
-
-    //no error then execute
-    if (empty($username_err) && empty($password_err) ) {
-        $sql = " INSERT INTO user_details (username, password) VALUES (?,?)";
-        $stmt = mysqli_prepare($conn, $sql);
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
-
-            $param_username = $username;
-            $param_password = password_hash($password, PASSWORD_DEFAULT);
-
-            //executing the query
-            if (mysqli_stmt_execute($stmt)) {
-                header("location:login.php");
-            } else {
-                echo "Something went wrong...cann't redirect";
-            }
-        }
-        mysqli_stmt_close($stmt);
-    }
-    mysqli_close($conn);
-}
-?>
-
-
 <!doctype html>
 <html lang="en">
 
@@ -108,25 +37,26 @@ if ($_server['REQUEST_METHORD' == "POST"]) {
     <div class="container mt-4">
         <h1 style="text-align:center"> Registration Form </h1>
 
-        <form action="connect.php" method="POST">
+        <?php if(!empty($msg)){echo $msg;} $msg=""; ?>
+        <form action="Register_connect.php" method="POST">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="FirstName">First Name</label>
-                    <input type="varchar" class="form-control" name="First_Name" id="inputFirstName" placeholder="FirstName">
+                    <label>First Name</label>
+                    <input type="varchar" class="form-control" name="First_Name" size="20" placeholder="FirstName" value="<?php if(!empty($_POST['First_Name'])) {echo $_POST['First_Name'];} ?>">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="LastName">Last Name</label>
-                    <input type="varchar" class="form-control" name="Last_Name" id="inputLastName" placeholder="LastName">
+                    <label>Last Name</label>
+                    <input type="varchar" class="form-control" name="Last_Name" size="20" placeholder="LastName">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="Sap-ID">Sap ID</label>
-                    <input type="int" class="form-control" name="Sap_ID" id="inputSap-ID" placeholder="Sap-ID">
+                    <label>Sap ID</label>
+                    <input type="int" class="form-control" name="Sap_ID" size="12" placeholder="Sap-ID">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="Stream">Stream</label>
-                    <select type="text" class="form-control" name="Stream" id="inputStream" placeholder="Stream">
+                    <label>Stream</label>
+                    <select type="text" class="form-control" name="Stream"  placeholder="Stream">
                         <option> </option>
                         <option>CCVT</option>
                         <option>AIML</option>
@@ -138,12 +68,12 @@ if ($_server['REQUEST_METHORD' == "POST"]) {
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
-                    <input type="varchar" class="form-control" name="Email" id="inputEmail4" placeholder="Email">
+                    <label>Email</label>
+                    <input type="varchar" class="form-control" name="Email" size="20" placeholder="Email">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputGender">Gender</label>
-                    <select type="Char" class="form-control" name="Gender" id="inputGender" placeholder="Gender">
+                    <label>Gender</label>
+                    <select type="Char" class="form-control" name="Gender" placeholder="Gender">
                         <option> </option>
                         <option>Male</option>
                         <option>Female</option>
@@ -153,36 +83,27 @@ if ($_server['REQUEST_METHORD' == "POST"]) {
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputUsername">Username</label>
-                    <input type="varchar" class="form-control" name="Username" id="inputUsername" placeholder="Username">
+                    <label>Username</label>
+                    <input type="varchar" class="form-control" name="Username" size="20" placeholder="Username">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password</label>
-                    <input type="varchar" class="form-control" name="Password" id="inputPassword4" placeholder="Password">
+                    <label>Password</label>
+                    <input type="varchar" class="form-control" name="Password" size="16" placeholder="Password">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputPhoneNo">Mobile</label>
-                    <input type="int" class="form-control" name="Mobile" id="inputPhoneNo" placeholder="Mobile Number">
+                    <label>Mobile</label>
+                    <input type="int" class="form-control" name="Mobile" size="15" placeholder="Mobile Number">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputDoB">Date of Birthday</label>
-                    <input type="date" class="form-control" name="DateOfBirth" id="inputDoB" placeholder="DoB">
+                    <label>Date of Birthday</label>
+                    <input type="date" class="form-control" name="DateOfBirth"  placeholder="DoB">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Sign in</button>
         </form>
     </div>
-
-
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>
